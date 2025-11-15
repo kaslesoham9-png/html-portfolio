@@ -49,3 +49,31 @@ for (let i = 0; i < 60; i++) {
 
     particleContainer.appendChild(p);
 }
+
+// Web3Forms Integration
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const data = Object.fromEntries(formData.entries());
+    data.access_key = "45e5ae9e-d275-4c0a-93f0-a33394a91d1f"; // Replace with your Web3Forms API key
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if(result.success) {
+        document.getElementById("formStatus").innerText = "Message sent successfully!";
+        form.reset();
+    } else {
+        document.getElementById("formStatus").innerText = "Oops! Something went wrong.";
+    }
+});

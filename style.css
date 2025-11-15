@@ -217,29 +217,28 @@ textarea {
 }
 
 /*hehe*/
-.linkedin-glass {
+/* LinkedIn Icon Only */
+.linkedin-icon {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    color: #0A66C2;
-    background: rgba(255, 255, 255, 0.06);
-    border: 2px solid rgba(10, 102, 194, 0.6);
-    border-radius: 14px;
-    backdrop-filter: blur(10px);
-    transition: 0.35s ease;
-    box-shadow: 0 0 0 rgba(10, 102, 194, 0);
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    background: #0077b5;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 119, 181, 0.5);
+    margin-bottom: 25px;
+    transition: 0.3s ease-in-out;
 }
 
-.linkedin-glass:hover {
-    color: white;
-    background: #0A66C2;
-    border-color: #0A66C2;
-    box-shadow: 0 0 15px #0A66C2,
-                0 0 40px #0A66C2,
-                0 0 80px #0A66C2;
-    transform: translateY(-4px);
+.linkedin-icon img {
+    width: 32px;
+    height: 32px;
+    filter: invert(1); /* makes the icon white */
+}
+
+.linkedin-icon:hover {
+    background: #0090e4;
+    box-shadow: 0 0 18px rgba(0, 119, 181, 0.8);
+    transform: translateY(-3px);
 }
