@@ -24,7 +24,7 @@
         </div>
 
         <div class="image-box">
-            <img src="images/soham1.jpg" alt="Soham">
+            <img src="hero1.jpeg" alt="Soham">
         </div>
 
     </div>
@@ -35,14 +35,14 @@
 <section class="panel" id="about">
     <div class="section-container">
 
-        <div class="text-box">
-            <h2>About Me</h2>
-            <p>I’m a general engineering student exploring robotics, software development,
-               electronics and innovation.</p>
-        </div>
-
         <div class="image-box">
             <img src="images/soham2.jpg" alt="Soham">
+        </div>
+
+        <div class="text-box">
+            <h2>About Me</h2>
+            <p>I'm a Computer Engineering student studing at Fr. Conceicao Rodrigues College of Engineering. I love 
+                coding in different languages like Java,C,C++,etc.</p>
         </div>
 
     </div>
@@ -99,15 +99,23 @@
         <section class="panel" id="contact">
             <div class="content">
                 <h2>Contact Me</h2>
-                <form id="contactForm">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
 
-                <p align="left"><a href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" class="linkedin-glass">
-                    <i class="fa-brands fa-linkedin"></i>LinkedIn</a></p>
+<!-- LinkedIn Icon Button -->
+<a href="https://www.linkedin.com/in/soham-kasle-38a51230b" 
+   target="_blank" 
+   class="linkedin-icon">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn">
+</a>
+
+
+<form id="contactForm">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+</form>
+
+<p id="formStatus"></p> 
 
             </div>
         </section>
