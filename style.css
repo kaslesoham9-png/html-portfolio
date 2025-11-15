@@ -1,0 +1,245 @@
+/* GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    overflow: hidden;
+    background: #0a0f1f;
+    color: white;
+}
+
+/* BACKGROUND GRADIENT & GLOW */
+#scroll-container {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    position: relative;
+    z-index: 2;
+}
+
+/* PANELS */
+.panel {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1.2s ease;
+}
+
+.panel.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content {
+    width: 75%;
+    text-align: center;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+/* TITLES */
+.title {
+    font-size: 4rem;
+    text-shadow: 0 0 20px #00eaff, 0 0 40px #00aaff;
+}
+
+.title span {
+    color: #00eaff;
+}
+
+/* SUBTITLE */
+.subtitle {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #00eaff;
+    border: none;
+    color: black;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 0 15px #00eaff;
+}
+
+.btn:hover {
+    background: white;
+}
+
+/* GRID SKILLS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.skill-card {
+    background: rgba(0, 255, 255, 0.15);
+    border: 2px solid #00eaff;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px #00eaff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    transition: 0.4s;
+}
+
+.skill-card:hover {
+    transform: scale(1.08);
+}
+
+/* PROJECT BOXES */
+.project-box {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 20px auto;
+    width: 70%;
+    border-left: 6px solid #00eaff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 238, 255, 0.4);
+    transition: 0.4s;
+}
+
+.project-box:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* CONTACT FORM */
+input, textarea {
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+textarea {
+    height: 120px;
+}
+
+/* PARTICLES */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 238, 255, 0.5);
+    box-shadow: 0 0 15px #00eaff;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.section-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.text-box {
+    width: 50%;
+}
+
+.image-box {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.image-box img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    border: 3px solid #00eaff;
+    box-shadow: 0 0 20px #00eaff, 0 0 60px rgba(0, 238, 255, 0.4);
+    animation: floatImage 6s ease-in-out infinite;
+}
+
+/* Animated floating image */
+@keyframes floatImage {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .section-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text-box, .image-box {
+        width: 100%;
+    }
+
+    .image-box img {
+        max-width: 260px;
+    }
+}
+
+/*hehe*/
+.linkedin-glass {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #0A66C2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(10, 102, 194, 0.6);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    transition: 0.35s ease;
+    box-shadow: 0 0 0 rgba(10, 102, 194, 0);
+}
+
+.linkedin-glass:hover {
+    color: white;
+    background: #0A66C2;
+    border-color: #0A66C2;
+    box-shadow: 0 0 15px #0A66C2,
+                0 0 40px #0A66C2,
+                0 0 80px #0A66C2;
+    transform: translateY(-4px);
+}
