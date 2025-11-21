@@ -354,40 +354,33 @@ section {
     min-height: 100vh;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+/* Toggle button */
+.nav-toggle-btn {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: none;
+    padding: 12px 15px;
+    border-radius: 12px;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.3s;
 }
 
-@media (max-width: 768px) {
-    * {
-        box-sizing: border-box;
-    }
+.nav-toggle-btn:hover {
+    background: rgba(0,0,0,0.6);
+}
 
-    body {
-        padding: 10px;
-    }
+/* Hide animation */
+.left-nav {
+    transition: transform 0.4s ease;
+}
 
-    /* Make sections stack properly */
-    .panel, .content, section {
-        width: 100%;
-        padding: 10px;
-    }
-
-    /* Make text smaller for mobile */
-    h1, h2, h3 {
-        text-align: center;
-    }
-
-    /* Fix navbar for phone */
-    .navbar, nav, ul {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    /* Fix project boxes */
-    .project-box {
-        width: 100%;
-        margin: 10px 0;
-    }
+/* When hidden */
+.left-nav.hidden {
+    transform: translateX(-120px);
 }

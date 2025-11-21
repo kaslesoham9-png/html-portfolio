@@ -81,3 +81,10 @@ document.getElementById("contactForm").addEventListener("submit", async function
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
+
+    const nav = document.querySelector('.left-nav');
+    const btn = document.getElementById('navToggle');
+
+    btn.addEventListener('click', () => {
+        nav.classList.toggle('hidden');
+    });
