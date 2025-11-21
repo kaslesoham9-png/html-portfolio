@@ -58,7 +58,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
     const formData = new FormData(form);
 
     const data = Object.fromEntries(formData.entries());
-    data.access_key = "45e5ae9e-d275-4c0a-93f0-a33394a91d1f"; // Replace with your Web3Forms API key
+    data.access_key = "45e5ae9e-d275-4c0a-93f0-a33394a91d1f";
 
     const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -76,4 +76,8 @@ document.getElementById("contactForm").addEventListener("submit", async function
     } else {
         document.getElementById("formStatus").innerText = "Oops! Something went wrong.";
     }
+});
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
 });

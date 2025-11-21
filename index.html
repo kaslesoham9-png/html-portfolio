@@ -14,13 +14,26 @@
     <!-- MAIN SCROLL CONTAINER -->
     <div id="scroll-container">
 
+    <!-- VERTICAL RIGHT NAVBAR -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<nav class="left-nav">
+    <ul>
+        <li><a href="#home"><i class="fa-solid fa-house"></i></a></li>
+        <li><a href="#about"><i class="fa-solid fa-user"></i></a></li>
+        <li><a href="#skills"><i class="fa-solid fa-code"></i></a></li>
+        <li><a href="#projects"><i class="fa-solid fa-diagram-project"></i></a></li>
+        <li><a href="#contact"><i class="fa-solid fa-envelope"></i></a></li>
+    </ul>
+</nav>
+
+
 <section class="panel" id="home">
     <div class="section-container">
         
         <div class="text-box">
             <h1 class="title">Hi, I'm <span>Soham</span></h1>
             <p class="subtitle">Engineering Student • Developer • Innovator</p>
-            <button class="btn" onclick="nextSection()">Explore ↓</button>
         </div>
 
         <div class="image-box">
@@ -36,13 +49,14 @@
     <div class="section-container">
 
         <div class="image-box">
-            <img src="images/soham2.jpg" alt="Soham">
+            <img src="hero2.jpeg" alt="Soham" style="height: 700px;">
         </div>
 
         <div class="text-box">
             <h2>About Me</h2>
             <p>I'm a Computer Engineering student studing at Fr. Conceicao Rodrigues College of Engineering. I love 
-                coding in different languages like Java,C,C++,etc.</p>
+                coding in different languages like Java,C,C++,etc. I like read books, make things out of cardboard, 
+            solving cubes, etc.</p>
         </div>
 
     </div>
@@ -58,42 +72,48 @@
             <div class="grid">
                 <div class="skill-card">C / C++</div>
                 <div class="skill-card">Web Development</div>
-                <div class="skill-card">Electronics</div>
-                <div class="skill-card">Robotics</div>
+                <div class="skill-card">Sports</div>
+                <div class="skill-card">Rubik's Cube</div>
                 <div class="skill-card">Java</div>
-                <div class="skill-card">AI</div>
+                <div class="skill-card">DIY</div>
             </div>
         </div>
 
-        <div class="image-box">
-            <img src="images/soham3.jpg" alt="Soham">
+        <div class="image-box collage">
+            <img src="cube.jpeg" alt="Soham">
+            <img src="certificate.jpg" alt="Soham">
+            <img src="img.jpg" alt="Soham">
         </div>
 
     </div>
 </section>
 
 
-        <!-- PROJECTS -->
-        <section class="panel" id="projects">
-            <div class="content">
-                <h2>My Projects</h2>
+<!-- PROJECTS -->
+<section class="panel" id="projects">
+    <div class="content">
+        <h1>My Projects</h1>
 
-                <div class="project-box">
-                    <h3>Smart Parking System</h3>
-                    <p>Automated ultrasonic-based parking detector system using IoT.</p>
-                </div>
+        <div class="project-box">
+            <h3>Smart Academic Planner</h3>
+            <p>Once set the information, reminds you about your important works, exam, etc.</p>
+            <a href="acadplan.html" target="_blank" class="project-btn">View Project</a>
+        </div>
 
-                <div class="project-box">
-                    <h3>Gesture Control Robot</h3>
-                    <p>Hand-gesture controlled robot using Arduino & motion sensors.</p>
-                </div>
+        <div class="project-box">
+            <h3>Snake And The Fruit</h3>
+            <p>The classic snake and the fruit game with some additional features.</p>
+            <a href="snake.html" target="_blank" class="project-btn">View Project</a>
+        </div>
 
-                <div class="project-box">
-                    <h3>Portfolio Website</h3>
-                    <p>Animated, responsive, and visually rich portfolio website.</p>
-                </div>
-            </div>
-        </section>
+        <div class="project-box">
+            <h3>Guess the number</h3>
+            <p>A simple game of guessing the number with fun UI.</p>
+            <a href="num.html" target="_blank" class="project-btn">View Project</a>
+        </div>
+    </div>
+</section>
+
 
         <!-- CONTACT -->
         <section class="panel" id="contact">
@@ -105,6 +125,13 @@
    target="_blank" 
    class="linkedin-icon">
     <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn">
+</a>
+
+<!-- Github Icon Button -->
+<a href="https://github.com/kaslesoham9-png"
+   target="_blank"
+   class="github-icon">
+    <img src="https://img.icons8.com/ios-glyphs/50/ffffff/github.png" alt="GitHub">
 </a>
 
 

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AcadPlan Scheduler & Planner</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #1e1e2f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      user-select: none;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(37, 117, 252, 0.3);
+      padding: 40px 50px;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #2575fc;
+      margin-bottom: 6px;
+      text-align: center;
+      letter-spacing: 1.1px;
+      text-shadow: 1px 1px 4px rgba(37, 117, 252, 0.4);
+    }
+
+    header p {
+      font-style: italic;
+      color: #5c5c7a;
+      margin-bottom: 36px;
+      text-align: center;
+      font-size: 1.15rem;
+      line-height: 1.4;
+    }
+
+    #logoutBtn {
+      background-color: #ff5252;
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto 40px auto;
+      box-shadow: 0 6px 12px rgba(255, 82, 82, 0.4);
+      user-select: none;
+    }
+
+    #logoutBtn:hover {
+      background-color: #e04848;
+    }
+
+    .feature {
+      margin-bottom: 48px;
+    }
+
+    .feature h2 {
+      font-weight: 600;
+      color: #2575fc;
+      margin-bottom: 24px;
+      font-size: 1.8rem;
+      border-bottom: 3px solid #2575fc;
+      padding-bottom: 6px;
+      user-select: none;
+    }
+
+    form {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="datetime-local"],
+    select {
+      flex: 1 1 240px;
+      padding: 14px 18px;
+      border: 2px solid #d3d3d3;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+      user-select: text;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus,
+    input[type="datetime-local"]:focus,
+    select:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 6px #2575fcaa;
+    }
+
+    button {
+      background-color: #2575fc;
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      flex: 0 0 auto;
+      box-shadow: 0 8px 20px rgba(37, 117, 252, 0.4);
+    }
+
+    button:hover {
+      background-color: #1b59d9;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(27, 89, 217, 0.6);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      max-height: 220px;
+      overflow-y: auto;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      box-shadow: inset 0 2px 6px #f0f4ff;
+      background: #f9fbff;
+      user-select: none;
+    }
+
+    ul li {
+      background-color: #ffffff;
+      margin-bottom: 10px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      color: #333;
+      box-shadow: 0 2px 6px rgba(37, 117, 252, 0.1);
+      transition: background-color 0.2s ease;
+      user-select: text;
+    }
+
+    ul li:hover {
+      background-color: #e6f0ff;
+    }
+
+    .priority-High {
+      border-left: 6px solid #ff4d4d;
+      font-weight: 700;
+      color: #b42323;
+      background-color: #fff0f0;
+    }
+
+    .priority-Medium {
+      border-left: 6px solid #ffa500;
+      font-weight: 600;
+      color: #9a6c00;
+      background-color: #fff8e1;
+    }
+
+    .priority-Low {
+      border-left: 6px solid #4caf50;
+      font-weight: 600;
+      color: #256029;
+      background-color: #e6f4ea;
+    }
+
+    #notificationStatus {
+      margin-top: 12px;
+      font-style: italic;
+      color: #2575fc;
+      font-weight: 600;
+      min-height: 22px;
+      user-select: none;
+    }
+
+    /* Login & Signup modal styling */
+    #authModal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+      animation: fadeInModal 0.6s ease forwards;
+    }
+
+    @keyframes fadeInModal {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    #authForms {
+      background-color: #ffffff;
+      padding: 40px 40px 36px;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(37, 117, 252, 0.25);
+      width: 360px;
+      max-width: 100%;
+      color: #1e1e2f;
+      user-select: none;
+    }
+
+    #authForms h2 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #2575fc;
+      user-select: text;
+    }
+
+    .errorMsg {
+      color: #ff4d4d;
+      margin-bottom: 20px;
+      display: none;
+      text-align: center;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    #authForms input {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      border: 2px solid #d3d3d3;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+      user-select: text;
+    }
+
+    #authForms input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 6px #2575fcaa;
+    }
+
+    #authForms button {
+      width: 100%;
+      padding: 14px 0;
+      border-radius: 30px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(37, 117, 252, 0.45);
+    }
+
+    .toggle-link {
+      color: #2575fc;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 12px;
+      display: block;
+      text-decoration: underline;
+      font-size: 1rem;
+      font-weight: 600;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-link:hover {
+      color: #1b59d9;
+    }
+
+    /* Scrollbar for lists */
+    ul::-webkit-scrollbar {
+      width: 6px;
+    }
+    ul::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 6px;
+    }
+    ul::-webkit-scrollbar-thumb {
+      background: #2575fc;
+      border-radius: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 24px;
+      }
+      form {
+        flex-direction: column;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="email"],
+      input[type="datetime-local"],
+      select,
+      button {
+        flex: 1 1 100% !important;
+      }
+      #logoutBtn {
+        width: 100%;
+        padding: 14px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Auth Modal (Login & Signup) -->
+  <div id="authModal" role="dialog" aria-modal="true">
+    <div id="authForms">
+      <!-- Login Form -->
+      <form id="loginForm" autocomplete="off" style="display:block;">
+        <h2>Login to AcadPlan</h2>
+        <div id="loginError" class="errorMsg" role="alert">Invalid email or password</div>
+        <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required autocomplete="email" />
+        <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required autocomplete="current-password" />
+        <button type="submit">Login</button>
+        <span class="toggle-link" id="showSignup">Don't have an account? Sign up</span>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signupForm" autocomplete="off" style="display:none;">
+        <h2>Sign Up for AcadPlan</h2>
+        <div id="signupError" class="errorMsg" role="alert"></div>
+        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required autocomplete="email" />
+        <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required autocomplete="new-password" />
+        <input type="password" id="signupPasswordConfirm" name="signupPasswordConfirm" placeholder="Confirm Password" required autocomplete="new-password" />
+        <button type="submit">Sign Up</button>
+        <span class="toggle-link" id="showLogin">Already have an account? Login</span>
+      </form>
+    </div>
+  </div>
+
+  <div class="container" id="mainContent" style="display:none;">
+    <header>
+      <h1>AcadPlan: Smart Academic Scheduler & Planner</h1>
+      <p>Organize and manage your academic activities efficiently. Stay consistent and never miss important deadlines!</p>
+      <header>
+        <div>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </header>
+    </header>
+
+    <section class="feature">
+      <h2>Timetable Integration</h2>
+      <form id="timetableForm">
+        <input type="text" id="examSubject" name="examSubject" placeholder="Exam Subject" required />
+        <input type="datetime-local" id="examDateTime" name="examDateTime" required />
+        <button type="submit">Add</button>
+      </form>
+      <ul id="timetableList" aria-live="polite" aria-label="Timetable list"></ul>
+    </section>
+
+    <section class="feature">
+      <h2>Automated Study Planner</h2>
+      <button type="button" onclick="generateStudyPlan()">Generate Study Plan</button>
+      <ul id="studyPlanList" aria-live="polite" aria-label="Study plan list"></ul>
+    </section>
+
+    <section class="feature">
+      <h2>To-Do List with Priorities</h2>
+      <form id="todoForm">
+        <input type="text" id="taskName" name="taskName" placeholder="Task Name" required />
+        <select id="priority" name="priority" required>
+          <option value="" disabled selected>Select Priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <button type="submit">Add</button>
+      </form>
+      <ul id="todoList" aria-live="polite" aria-label="To-do list"></ul>
+    </section>
+
+    <section class="feature">
+      <h2>Event & Reminder Notifications</h2>
+      <button type="button" onclick="sendEmailReminder()">Send Test Email Reminder</button>
+      <div id="notificationStatus" role="status" aria-live="polite"></div>
+    </section>
+    <center>"All Rights Reserved © 2025 Acad Plan"</center>
+    <p>
+    <center>
+          <a href="/home">Home</a>
+          <a href="/about">About</a>
+          <a href="/contact us">Contact us</a>
+          </center>
+          </p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authModal = document.getElementById('authModal');
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const loginError = document.getElementById('loginError');
+      const signupError = document.getElementById('signupError');
+      const mainContent = document.getElementById('mainContent');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const showSignupLink = document.getElementById('showSignup');
+      const showLoginLink = document.getElementById('showLogin');
+
+      // Show signup form
+      showSignupLink.addEventListener('click', () => {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        loginError.style.display = 'none';
+        signupError.style.display = 'none';
+      });
+
+      // Show login form
+      showLoginLink.addEventListener('click', () => {
+        signupForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        loginError.style.display = 'none';
+        signupError.style.display = 'none';
+      });
+
+      // Check if user is logged in (simple check)
+      function isLoggedIn() {
+        return localStorage.getItem('loggedInUser') !== null;
+      }
+
+      // Show main content if logged in
+      if (isLoggedIn()) {
+        authModal.style.display = 'none';
+        mainContent.style.display = 'block';
+      }
+
+      // Signup form submit handler
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('signupPasswordConfirm').value;
+
+        signupError.style.display = 'none';
+        signupError.textContent = '';
+
+        // Validate password match
+        if (password !== confirmPassword) {
+          signupError.textContent = 'Passwords do not match.';
+          signupError.style.display = 'block';
+          return;
+        }
+
+        // Check if user already exists
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[email]) {
+          signupError.textContent = 'Email is already registered.';
+          signupError.style.display = 'block';
+          return;
+        }
+
+        // Save user
+        users[email] = { password };
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Auto login after signup
+        localStorage.setItem('loggedInUser', email);
+        signupForm.reset();
+        authModal.style.display = 'none';
+        mainContent.style.display = 'block';
+      });
+
+      // Login form submit handler
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value;
+
+        loginError.style.display = 'none';
+
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[email] && users[email].password === password) {
+          // Successful login
+          localStorage.setItem('loggedInUser', email);
+          loginForm.reset();
+          authModal.style.display = 'none';
+          mainContent.style.display = 'block';
+        } else {
+          // Show error message
+          loginError.style.display = 'block';
+        }
+      });
+
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('loggedInUser');
+        mainContent.style.display = 'none';
+        authModal.style.display = 'flex';
+      });
+
+      // Timetable form handling
+      const timetableForm = document.getElementById('timetableForm');
+      const timetableList = document.getElementById('timetableList');
+
+      function loadTimetable() {
+  const timetable = JSON.parse(localStorage.getItem('timetable') || '[]');
+  timetableList.innerHTML = '';
+  timetable.forEach((item, idx) => {
+    const li = document.createElement('li');
+    li.textContent = `${item.subject} - ${new Date(item.datetime).toLocaleString()}`;
+
+    // Add delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '×';
+    deleteBtn.style.background = 'transparent';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.color = '#999';
+    deleteBtn.style.fontSize = '1.4rem';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.title = 'Delete exam';
+    deleteBtn.setAttribute('aria-label', `Delete exam ${item.subject}`);
+
+    deleteBtn.addEventListener('click', () => {
+      timetable.splice(idx, 1);
+      localStorage.setItem('timetable', JSON.stringify(timetable));
+      loadTimetable();
+    });
+
+    li.appendChild(deleteBtn);
+    timetableList.appendChild(li);
+  });
+}
+
+
+      timetableForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const subject = document.getElementById('examSubject').value.trim();
+        const datetime = document.getElementById('examDateTime').value;
+
+        if (!subject || !datetime) return;
+
+        const timetable = JSON.parse(localStorage.getItem('timetable') || '[]');
+        timetable.push({ subject, datetime });
+        localStorage.setItem('timetable', JSON.stringify(timetable));
+
+        timetableForm.reset();
+        loadTimetable();
+      });
+
+      loadTimetable();
+
+      // To-do list with priorities
+      const todoForm = document.getElementById('todoForm');
+      const todoList = document.getElementById('todoList');
+
+      function loadTodoList() {
+        const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+        todoList.innerHTML = '';
+        todos.forEach((task, idx) => {
+          const li = document.createElement('li');
+          li.classList.add(`priority-${task.priority}`);
+          li.textContent = `${task.name} [${task.priority}]`;
+
+          // Optional: Add a remove button for each task
+          const removeBtn = document.createElement('button');
+          removeBtn.textContent = '×';
+          removeBtn.style.background = 'transparent';
+          removeBtn.style.border = 'none';
+          removeBtn.style.color = '#999';
+          removeBtn.style.fontSize = '1.4rem';
+          removeBtn.style.cursor = 'pointer';
+          removeBtn.title = 'Remove task';
+          removeBtn.setAttribute('aria-label', `Remove task ${task.name}`);
+
+          removeBtn.addEventListener('click', () => {
+            todos.splice(idx, 1);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            loadTodoList();
+          });
+
+          li.appendChild(removeBtn);
+          todoList.appendChild(li);
+        });
+      }
+
+      todoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('taskName').value.trim();
+        const priority = document.getElementById('priority').value;
+
+        if (!name || !priority) return;
+
+        const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+        todos.push({ name, priority });
+        localStorage.setItem('todos', JSON.stringify(todos));
+
+        todoForm.reset();
+        loadTodoList();
+      });
+
+      loadTodoList();
+
+      // Automated Study Planner (basic example)
+      const studyPlanList = document.getElementById('studyPlanList');
+
+      window.generateStudyPlan = function () {
+        studyPlanList.innerHTML = '';
+        const timetable = JSON.parse(localStorage.getItem('timetable') || '[]');
+        if (timetable.length === 0) {
+          studyPlanList.textContent = 'No exams added yet.';
+          return;
+        }
+
+        // Sort exams by datetime
+        timetable.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+
+        // Simple plan: Study subject 3 days before exam
+        timetable.forEach(item => {
+          const examDate = new Date(item.datetime);
+          const studyStart = new Date(examDate);
+          studyStart.setDate(examDate.getDate() - 3);
+          const now = new Date();
+
+          const li = document.createElement('li');
+          if (studyStart > now) {
+            li.textContent = `Start studying ${item.subject} on ${studyStart.toLocaleDateString()}`;
+          } else {
+            li.textContent = `Study ${item.subject} now! Exam on ${examDate.toLocaleDateString()}`;
+          }
+          studyPlanList.appendChild(li);
+        });
+      };
+
+      // Event & Reminder Notifications (dummy email reminder)
+      const notificationStatus = document.getElementById('notificationStatus');
+
+      window.sendEmailReminder = function () {
+        notificationStatus.textContent = 'Sending email reminder...';
+        // Simulate async email sending
+        setTimeout(() => {
+          notificationStatus.textContent = 'Email reminder sent successfully!';
+          setTimeout(() => {
+            notificationStatus.textContent = '';
+          }, 4000);
+        }, 2000);
+      };
+    });
+  </script>
+</body>
+</html>

@@ -121,6 +121,24 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.project-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    background: #00eaff;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.project-btn:hover {
+    background: #0088aa;
+    color: white;
+    transform: translateY(-3px);
+}
+
 /* CONTACT FORM */
 input, textarea {
     padding: 12px;
@@ -216,7 +234,6 @@ textarea {
     }
 }
 
-/*hehe*/
 /* LinkedIn Icon Only */
 .linkedin-icon {
     display: inline-flex;
@@ -241,4 +258,136 @@ textarea {
     background: #0090e4;
     box-shadow: 0 0 18px rgba(0, 119, 181, 0.8);
     transform: translateY(-3px);
+}
+
+/*github icon*/
+.github-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    background: #cbcbcb;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(36, 41, 46, 0.5);
+    margin-bottom: 25px;
+    transition: 0.3s ease-in-out;
+}
+
+.github-icon img {
+    width: 32px;
+    height: 32px;
+    filter: invert(1); /* makes icon white */
+}
+
+.github-icon:hover {
+    background: #ffffff;
+    box-shadow: 0 0 18px rgba(224, 224, 224, 0.8);
+    transform: translateY(-3px);
+}
+
+/*for photos*/
+.image-box.collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.image-box.collage img {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Left Vertical Navbar */
+.left-nav {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    z-index: 999;
+}
+
+.left-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.left-nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+    transition: 0.3s;
+}
+
+.left-nav ul li a:hover {
+    background: #00bfff;
+    color: black;
+    transform: translateX(5px);
+    box-shadow: 0 0 12px #00bfff;
+}
+
+/* Section spacing */
+section {
+    padding: 120px 40px;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    /* Make sections stack properly */
+    .panel, .content, section {
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* Make text smaller for mobile */
+    h1, h2, h3 {
+        text-align: center;
+    }
+
+    /* Fix navbar for phone */
+    .navbar, nav, ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Fix project boxes */
+    .project-box {
+        width: 100%;
+        margin: 10px 0;
+    }
 }

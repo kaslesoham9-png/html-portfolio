@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guessing Game – Themes</title>
+
+<style id="theme-style">
+/* Default theme (Neon) */
+body {
+    margin: 0;
+    background: radial-gradient(circle, #1a002b, #000);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #00ffea;
+}
+
+.game-box {
+    background: rgba(0, 0, 40, 0.9);
+    padding: 30px;
+    width: 350px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid #00ffee;
+    box-shadow: 0 0 25px #00ffee;
+}
+
+input, button, select {
+    width: 80%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+}
+
+input {
+    background: #06111a;
+    color: #00ffea;
+    border: 2px solid #00ffee;
+}
+
+button {
+    background: #00ffea;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+select {
+    background: #02121e;
+    color: #00ffea;
+    border: 2px solid #00ffee;
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game-box">
+    <h2 id="title">🎮 Number Guessing Game</h2>
+
+    <select id="theme" onchange="changeTheme()">
+        <option value="neon">Neon</option>
+        <option value="dark">Dark</option>
+        <option value="cartoon">Cartoon</option>
+        <option value="glass">Glassmorphism</option>
+    </select>
+
+    <p>Guess a number between <b>1</b> and <b>100</b></p>
+    <p><b>Max Attempts: 7</b></p>
+
+    <input type="number" id="guess" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Guess</button>
+    <button onclick="restartGame()">Restart</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
+const maxAttempts = 7;
+let gameOver = false;
+
+// ----------------- Theme Switcher -----------------
+function changeTheme() {
+    const theme = document.getElementById("theme").value;
+    const style = document.getElementById("theme-style");
+
+    if (theme === "neon") {
+        style.innerHTML = `
+        body { margin:0;background: radial-gradient(circle,#1a002b,#000);color:#00ffea;font-family:Poppins;display:flex;justify-content:center;align-items:center;height:100vh; }
+        .game-box{background:rgba(0,0,40,0.9);padding:30px;width:350px;border-radius:20px;text-align:center;border:2px solid #00ffee;box-shadow:0 0 25px #00ffee;}
+        input,button,select{width:80%;padding:12px;margin-top:10px;border-radius:12px;border:none;font-size:16px;outline:none;}
+        input{background:#06111a;color:#00ffea;border:2px solid #00ffee;}
+        button{background:#00ffea;color:#000;font-weight:bold;cursor:pointer;}
+        button:hover{transform:scale(1.05);}
+        select{background:#02121e;color:#00ffea;border:2px solid #00ffee;}
+        .result{margin-top:15px;font-size:20px;font-weight:bold;}
+        `;
+    }
+
+    else if (theme === "dark") {
+        style.innerHTML = `
+        body { margin:0;background:#111;color:white;font-family:Poppins;display:flex;justify-content:center;align-items:center;height:100vh; }
+        .game-box{background:#222;padding:30px;width:350px;border-radius:20px;text-align:center;box-shadow:0 0 20px #000;}
+        input,button,select{width:80%;padding:12px;margin-top:10px;border-radius:12px;border:none;font-size:16px;outline:none;}
+        input{background:#333;color:white;}
+        button{background:#444;color:white;font-weight:bold;}
+        button:hover{background:#555;}
+        select{background:#333;color:white;}
+        .result{margin-top:15px;font-size:20px;font-weight:bold;}
+        `;
+    }
+
+    else if (theme === "cartoon") {
+        style.innerHTML = `
+        body { margin:0;background:#fffa96;color:#4d2e00;font-family:Comic Sans MS;display:flex;justify-content:center;align-items:center;height:100vh; }
+        .game-box{background:#fff3d0;padding:30px;width:350px;border-radius:20px;text-align:center;border:4px solid #ffb300;box-shadow:0 0 20px #ffcc4d;}
+        input,button,select{width:80%;padding:12px;margin-top:10px;border-radius:15px;border:none;font-size:16px;outline:none;}
+        input{background:white;border:3px solid #ffb300;}
+        button{background:#ffb300;color:#4d2e00;font-weight:bold;border:3px solid #4d2e00;}
+        button:hover{transform:scale(1.05);}
+        select{background:#ffe7a8;color:#4d2e00;border:3px solid #ffb300;}
+        .result{margin-top:15px;font-size:22px;font-weight:bold;}
+        `;
+    }
+
+    else if (theme === "glass") {
+        style.innerHTML = `
+        body { margin:0;background:url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80');background-size:cover;font-family:Poppins;display:flex;justify-content:center;align-items:center;height:100vh;color:#fff; }
+        .game-box{backdrop-filter:blur(15px);background:rgba(255,255,255,0.2);padding:30px;width:350px;border-radius:20px;text-align:center;border:1px solid rgba(255,255,255,0.3);box-shadow:0 0 20px rgba(255,255,255,0.4);}
+        input,button,select{width:80%;padding:12px;margin-top:10px;border-radius:12px;border:none;font-size:16px;outline:none;}
+        input{background:rgba(255,255,255,0.4);color:#000;}
+        button{background:rgba(255,255,255,0.6);color:#000;font-weight:bold;}
+        button:hover{background:rgba(255,255,255,0.8);}
+        select{background:rgba(255,255,255,0.4);color:#000;}
+        .result{margin-top:15px;font-size:20px;font-weight:bold;}
+        `;
+    }
+}
+
+// ----------------- Game Logic -----------------
+function checkGuess() {
+    if (gameOver) return;
+
+    let guess = Number(document.getElementById("guess").value);
+    let result = document.getElementById("result");
+
+    if (!guess || guess < 1 || guess > 100) {
+        result.textContent = "⚠ Enter a valid number!";
+        return;
+    }
+
+    attempts++;
+
+    if (guess === randomNumber) {
+        result.innerHTML = `🎉 Correct! The number was <b>${randomNumber}</b>`;
+        result.style.color = "lime";
+        gameOver = true;
+        return;
+    }
+
+    if (attempts >= maxAttempts) {
+        result.innerHTML = `💀 Game Over! The number was <b>${randomNumber}</b>`;
+        result.style.color = "red";
+        gameOver = true;
+        return;
+    }
+
+    result.style.color = guess < randomNumber ? "yellow" : "orange";
+    result.textContent = guess < randomNumber 
+        ? `📉 Too Low! (${maxAttempts - attempts} left)` 
+        : `📈 Too High! (${maxAttempts - attempts} left)`;
+}
+
+function restartGame() {
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    attempts = 0;
+    gameOver = false;
+    document.getElementById("result").textContent = "";
+    document.getElementById("guess").value = "";
+}
+</script>
+
+</body>
+</html>
